@@ -1,5 +1,6 @@
 BasicAdmin::Application.routes.draw do
+
   devise_for :users
 
-  root 'welcome#index'
+  root 'home#index'
 end
