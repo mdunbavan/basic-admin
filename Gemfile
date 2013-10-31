@@ -59,3 +59,4 @@ gem 'factory_girl_rails'
 # !**************************************************
 gem 'devise'
 gem 'devise_invitable'
+gem 'cancan'

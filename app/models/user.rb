@@ -1,6 +1,30 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+
+  # !**************************************************
+  # !                Associations
+  # !**************************************************
+
+  # !**************************************************
+  # !                Validations
+  # !**************************************************
+
+  # !**************************************************
+  # !                Callbacks
+  # !**************************************************
+
+  # !**************************************************
+  # !                  Other
+  # !**************************************************
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  def is_admin?
+    self.admin
+  end
+
+  # Override name to return email address if no name is set
+  def name
+    super.blank? ? self.email : super
+  end
+
 end
