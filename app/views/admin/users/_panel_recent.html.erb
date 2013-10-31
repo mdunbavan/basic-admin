@@ -1,0 +1,11 @@
+<div class="panel panel-info">
+  <div class="panel-heading">Recently Created Users</div>
+  <div class="list-group">
+    <% User.order("created_at DESC").limit(5).each do |u| %>
+      <a href="<%= admin_user_path(u) %>" class="list-group-item">
+        <%= u.name %> <span class="pull-right"><%= l(u.created_at, format: :good) %></span>
+      </a>
+    <% end %>
+  </div>
+  <div class="panel-footer"><%= link_to "See all #{pluralize(User.count, "user")}", admin_users_path %></div>
+</div>

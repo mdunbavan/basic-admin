@@ -10,10 +10,15 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => exception.message
   end
 
+  # Throw away flash messages after AJAX request
+  # (stops alerts etc popping up on next page load)
+  after_filter { flash.discard if request.xhr? }
+
   protected
 
     def configure_permitted_parameters
       devise_parameter_sanitizer.for(:sign_up) << :name
+      devise_parameter_sanitizer.for(:account_update) << :name
     end
 
     # Needed to make strong parameters work in create methods with CanCan

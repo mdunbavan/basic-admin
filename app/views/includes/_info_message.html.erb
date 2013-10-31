@@ -1,0 +1,33 @@
+<div id="info-message">
+  <div class="alert alert-success" id="info-notice"><%= notice %></div>
+  <div class="alert alert-danger" id="info-alert"><%= alert %></div>
+</div>
+
+<script>
+
+function show_alerts()
+{
+  $("#info-message").fadeIn().delay(3000).fadeOut();
+}
+
+function show_notice(content) {
+  $("#info-notice").html(content);
+  $("#info-notice").show();
+  show_alerts();
+}
+
+function show_alert(content) {
+  $("#info-alert").html(content);
+  $("#info-alert").show();
+  show_alerts();
+}
+
+$(document).ready(function(){
+  $("#info-message").hide();
+  $("#info-notice").hide();
+  $("#info-alert").hide();
+  <%= 'show_alert();' if flash[:alert] %>
+  <%= 'show_notice();' if flash[:notice] %>
+
+});
+</script>

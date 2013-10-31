@@ -1,1 +1,1 @@
-Settings.save_default(:per_page, 1)
+Setting.per_page = 10

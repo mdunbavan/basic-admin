@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   # !**************************************************
   # !                Validations
   # !**************************************************
+  validates_presence_of :name
 
   # !**************************************************
   # !                Callbacks
@@ -22,10 +23,4 @@ class User < ActiveRecord::Base
   def is_admin?
     self.admin
   end
-
-  # Override name to return email address if no name is set
-  def name
-    super.blank? ? self.email : super
-  end
-
 end

@@ -1,17 +1,17 @@
+<h1>Site Admin</h1>
 <div class="row">
   <div class="col-md-4">
-    <div class="panel panel-info">
-      <div class="panel-heading">Recently created users</div>
+    <%= render partial: 'admin/users/panel_recent' %>
+  </div>
+  <div class="col-md-4">
+
+    <div class="panel panel-warning">
+      <div class="panel-heading">Some Other Panel</div>
       <div class="panel-body">
-        <div class="list-group">
-          <% User.order("created_at DESC").limit(5).each do |u| %>
-            <%= link_to u.name, admin_user_path(u), class: "list-group-item" %>
-          <% end %>
-        </div>
+        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tincidunt luctus quam, sed fermentum magna porttitor in. Quisque luctus magna eget est congue sit amet aliquet nisl fermentum. Cras non libero est, nec volutpat lacus. Nullam vel dolor est. Sed vel ligula et mi dapibus gravida nec in risus. Sed nunc dui, lacinia non consectetur ac, pharetra a lacus. Nunc a dictum felis.</p>
       </div>
-      <div class="panel-footer"><%= link_to "See all #{pluralize(User.count, "user")}", admin_users_path %></div>
+      <div class="panel-footer">Wee lorem footer</div>
     </div>
 
   </div>
-  <div class="col-md-4">.col-md-4</div>
 </div>

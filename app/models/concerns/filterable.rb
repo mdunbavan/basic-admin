@@ -34,7 +34,7 @@ module Filterable
       end
 
       sort = "lower(#{sort})" if things.columns_hash[sort] and things.columns_hash[sort].type == :string
-      things.order( sort + ' ' + direction).paginate(:per_page => Settings.per_page, :page => page)
+      things.order( sort + ' ' + direction).paginate(:per_page => Setting.per_page, :page => page)
     end
   end
 end

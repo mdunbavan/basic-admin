@@ -25,7 +25,7 @@ class Admin::UsersController < AdminController
     @user.password = Devise.friendly_token.first(20) if @user.password.blank?
 
     if @user.save
-      redirect_to admin_user_path(@user)
+      redirect_to admin_user_path(@user), notice: "User created"
     else
       render :new
     end
@@ -36,17 +36,22 @@ class Admin::UsersController < AdminController
 
   def update
     if @user.update_attributes(user_params)
-      redirect_to admin_user_path(@user)
+      redirect_to admin_user_path(@user), notice: "#{@user.name} updated"
     else
       render :edit
     end
   end
 
   def destroy
+    redirect_to admin_users_path, alert: "You can't delete yourself" and return if current_user == @user
     if @user.delete
-      redirect_to admin_users_path
+      flash[:notice] = "User #{@user.name} deleted"
+      respond_to do |format|
+        format.html { redirect_to admin_users_path }
+        format.js
+      end
     else
-      redirect_to admin_user_path(@user)
+      redirect_to admin_user_path(@user), alert: "Could not delete user #{@user.name}"
     end
   end
 

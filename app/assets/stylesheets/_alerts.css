@@ -1,0 +1,9 @@
+#info-message {
+  text-align: center;
+  position: absolute;
+  width: 30em;
+  left: 50%;
+  margin-left: -15em;
+  top: 2em;
+  z-index: 2000;
+}

@@ -21,3 +21,6 @@
 
 en:
   hello: "Hello world"
+  time:
+      formats:
+        good: "%d %B, %Y, %H:%M"

@@ -1,14 +1,9 @@
 <%= simple_form_for user, url: admin_user_path(user), role: "form", html: {class: "form-horizontal"} do |f| %>
-  <div class="form-group">
-    <%= f.input :name, class: "form-control", placeholder: "Bob Smith" %>
-  </div>
 
-  <div class="form-group">
-    <%= f.input :email, class: "form-control", placeholder: "example@example.com" %>
-  </div>
+    <%= f.input :name, class: "form-control", placeholder: "Bob Smith", :autofocus => true, input_html: { class: "form-control"} %>
+    <%= f.input :email, class: "form-control", placeholder: "example@example.com", input_html: { class: "form-control"} %>
+    <%= f.input :admin, input_html: { class: "form-control"} unless current_user == user %>
 
-  <div class="checkbox">
-    <%= f.input :admin %>
-  </div>
-  <%= f.submit user.new_record? ? "Add User" : "Save User", class: "btn btn-default", disable_with: "Saving" %>
+    <%= link_to "Cancel", admin_users_path, class: "btn btn-default" %>
+    <%= f.submit user.new_record? ? "Add User" : "Save User", class: "btn btn-primary", disable_with: "Saving" %>
 <% end %>

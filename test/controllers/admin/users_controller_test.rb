@@ -65,7 +65,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
 
   test "can update user" do
     assert_no_difference "User.count" do
-      patch :update, id: @user2.id user: {name: "Updated User", email: "updated-example@example.com", admin: "1"}
+      patch :update, id: @user2.id, user: {name: "Updated User", email: "updated-example@example.com", admin: "1"}
     end
 
     updated_user = User.find(@user2.id)
@@ -89,6 +89,15 @@ class Admin::UsersControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to admin_users_path
+  end
+
+  test "user can't delete themselves" do
+    assert_no_difference "User.count" do
+      delete :destroy, id: @user.id
+    end
+
+    assert_redirected_to admin_users_path
+    assert_equal flash[:alert], "You can't delete yourself"
   end
 
   test "should be admin" do

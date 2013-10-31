@@ -4,6 +4,9 @@
     <%= hidden_field_tag :sort, params[:sort] %>
     <% defaults = @filters[:defaults] || {} %>
     <% filters = @filters[:options] || @filters %>
+
+    <div class="form-group info">Search:</div>
+
     <% filters.each do |fk,fv| %>
       <% if fk.nil? %>
 
@@ -63,7 +66,7 @@
     <% end %>
 
     <div class="form-group">
-      <%= link_to "<span class=\"glyphicon glyphicon-remove-circle\"></span> Reset Filters".html_safe,
+      <%= link_to "<span class=\"glyphicon glyphicon-remove-circle\"></span> Reset Search".html_safe,
                   request.path,
                   remote: true,
                   class: "reset-filters" %>

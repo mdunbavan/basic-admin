@@ -12,6 +12,11 @@ class UserTest < ActiveSupport::TestCase
     assert ! @user.save
   end
 
+  test "user needs a name" do
+    @user.name = ""
+    assert ! @user.save
+  end
+
   test "user needs a password" do
     @user.password = ""
     assert ! @user.save
@@ -22,13 +27,6 @@ class UserTest < ActiveSupport::TestCase
 
     @user.admin = true
     assert @user.is_admin?
-  end
-
-  test "user returns email instead of name if no name is set" do
-    assert_equal @user.name, "My Lovely Name"
-
-    @user.name = ""
-    assert_equal @user.name, "example@example.com"
   end
 
 end

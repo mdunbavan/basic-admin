@@ -1,11 +1,11 @@
 <h1>
-  Details for user <%= @user.name %>
+  Details for <%= @user.name %>
   <% if @user == current_user %>
     <small>(That's you!)</small>
   <% end %>
 </h1>
 
-<dl class="dl-horizontal">
+<dl>
   <dt>Name</dt>
   <dd><%= @user.name %></dd>
 
@@ -16,5 +16,8 @@
   <dd><%= @user.is_admin? ? "Yes" : "No" %></dd>
 </dl>
 
+<div>
+<%= link_to "Back", admin_users_path, class: "btn btn-default" %>
 <%= link_to "Edit", edit_admin_user_path(@user), class: "btn btn-primary" %>
-<%= link_to "Delete", admin_user_path(@user), class: "btn btn-danger", method: :delete, confirm: "Are you sure you want to delete this user" unless @user == current_user %>
+<%= link_to "Delete", admin_user_path(@user), class: "btn btn-danger", method: :delete, confirm: "Are you sure you want to delete #{@user.name}?" unless @user == current_user %>
+</div>

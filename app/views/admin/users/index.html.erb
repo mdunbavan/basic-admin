@@ -1,8 +1,6 @@
-<h1>Users</h1>
-
-Per Page: <%= Settings.per_page %>
-<div>
-  <%= link_to "Add User", new_admin_user_path, class: "btn btn-primary" %>
-</div>
+<h1>
+  Users
+  <%= link_to "Add a New User", new_admin_user_path, class: "btn btn-primary pull-right" %>
+</h1>
 
 <%= render partial: 'includes/sortable_table', locals: {items: @users} %>
