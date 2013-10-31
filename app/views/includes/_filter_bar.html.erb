@@ -1,0 +1,72 @@
+<div class="well">
+  <%= form_tag request.path, method: :get, remote: true, class: 'filter-form form-inline', role: "form" do %>
+    <%= hidden_field_tag :direction, params[:direction] %>
+    <%= hidden_field_tag :sort, params[:sort] %>
+    <% defaults = @filters[:defaults] || {} %>
+    <% filters = @filters[:options] || @filters %>
+    <% filters.each do |fk,fv| %>
+      <% if fk.nil? %>
+
+      <% elsif fv %>
+        <% field_name = fv[:field] || fk %>
+
+        <% if fv[:input_type] == :settings_select %>
+          <% setting = fv[:setting] || fk %>
+          <div class="form-group">
+          <%= select_tag( "search[#{field_name}][exact]",
+                          options_for_select( select_translations(setting), filter_default(fk, fv, defaults) ),
+                          prompt: field_name,
+                          class: "form-control") %>
+          </div>
+
+        <% elsif fv[:input_type] == :relation_select %>
+          <% name_method = fv[:name_method] || :name %>
+          <div class="form-group">
+            <%= select_tag( "search[#{field_name}][exact]",
+                            options_from_collection_for_select(fv[:options], :id, name_method, filter_default(fk, fv, defaults) ),
+                            prompt: field_name,
+                            class: "form-control") %>
+          </div>
+        <% elsif fv[:input_type] == :date_after %>
+          <div class="form-group">
+            <%= text_field_tag  "search[#{field_name}][date_after]",
+                                filter_default(fk, fv, defaults),
+                                placeholder:fk,
+                                type: :date,
+                                class: "form-control" %>
+          </div>
+        <% elsif fv[:input_type] == :date_before %>
+          <div class="form-group">
+            <%= text_field_tag  "search[#{field_name}][date_before]",
+                                filter_default(fk, fv, defaults),
+                                placeholder: fk,
+                                type: :date,
+                                class: "form-control" %>
+          </div>
+        <% elsif fv[:input_type] == :exact %>
+          <div class="form-group">
+            <%= text_field_tag  "search[#{field_name}][exact]",
+                                filter_default(fk, fv, defaults),
+                                placeholder: fk,
+                                class: "form-control" %>
+          </div>
+        <% else %>
+          <div class="form-group">
+            <%= text_field_tag "search[#{fk}]", filter_default(fv), placeholder: fk, class: "form-control" %>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="form-group">
+          <%= text_field_tag "search[#{fk}]", filter_default(fk, fv, defaults), placeholder: fk, class: "form-control" %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="form-group">
+      <%= link_to "<span class=\"glyphicon glyphicon-remove-circle\"></span> Reset Filters".html_safe,
+                  request.path,
+                  remote: true,
+                  class: "reset-filters" %>
+    </div>
+  <% end %>
+</div>

@@ -6,7 +6,6 @@ class Ability
 
     if user.is_admin?
       can :manage, :all
-      can :admin, :index
     end
 
   end

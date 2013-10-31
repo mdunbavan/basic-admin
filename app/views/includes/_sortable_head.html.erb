@@ -1,0 +1,10 @@
+<tr>
+  <% @columns.each do |c| %>
+    <% css_class = (c == params[:sort]) ? "current #{params[:direction]}" : nil %>
+    <% direction = (c == params[:sort] && params[:direction] == "asc") ? "desc" : "asc" %>
+    <th>
+      <%= link_to t("#{controller.controller_name.downcase}.index.#{c}"), params.merge(:sort => c, :direction => direction, :page => nil), {class: css_class, remote: true} %>
+    </th>
+  <% end %>
+  <th class='actions'><%= t('actions') %></th>
+</tr>

@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   # !**************************************************
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  include Filterable
 
   def is_admin?
     self.admin

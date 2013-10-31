@@ -1,0 +1,9 @@
+<% # We only want to reset the form on submit, otherwise the current field loses focus %>
+<% if params[:search].nil? %>
+  $("#filter-bar").html("<%= j render partial: 'includes/filter_bar' %>");
+<% end %>
+$("table#filter-list thead").html("<%= j render partial: 'includes/sortable_head' %>");
+$("table#filter-list tbody").html("<%= j render(items) || "<tr><td colspan=\"#{@columns.count+1}\">#{t("no_matches")}</td></tr>".html_safe %>");
+$(".js-pagination").html("<%= j will_paginate items, renderer: BootstrapPagination::Rails %>");
+
+form_overrides();

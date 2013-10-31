@@ -60,3 +60,6 @@ gem 'factory_girl_rails'
 gem 'devise'
 gem 'devise_invitable'
 gem 'cancan'
+gem 'simple_form'
+gem 'will_paginate-bootstrap'
+gem "rails-settings-cached", "0.3.1"

@@ -1,0 +1,18 @@
+<div class="filter-bar" id="filter-bar">
+  <%= render partial: 'includes/filter_bar' %>
+</div>
+
+<div class="table-responsive">
+  <table id="filter-list" class="table table-striped">
+    <thead>
+      <%= render partial: 'includes/sortable_head' %>
+    </thead>
+    <tbody>
+      <%= render(items) || "<tr><td colspan=\"#{@columns.count+1}\">#{t("no_matches")}</td></tr>".html_safe %>
+    </tbody>
+  </table>
+
+  <div class="js-pagination">
+    <%= will_paginate items, renderer: BootstrapPagination::Rails %>
+  </div>
+</div>

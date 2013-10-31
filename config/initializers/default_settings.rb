@@ -1,0 +1,1 @@
+Settings.save_default(:per_page, 1)
